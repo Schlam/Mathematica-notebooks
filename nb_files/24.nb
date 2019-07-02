@@ -1,0 +1,794 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     32919,        786]
+NotebookOptionsPosition[     30091,        742]
+NotebookOutlinePosition[     30523,        759]
+CellTagsIndexPosition[     30480,        756]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "We", " ", "start", " ", "by", " ", "declaring", " ", "the", " ", 
+     "following", " ", "constants"}], ";"}], "*)"}], "\n", "\n", 
+  RowBox[{
+   RowBox[{"\[Epsilon]", " ", "=", " ", 
+    RowBox[{"8.854", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "12"}], ")"}]}]}]}], "     ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Permitivity", " ", "of", " ", "free", " ", "space"}], ",", " ", 
+     
+     RowBox[{"in", " ", "farads", " ", "per", " ", "meter"}]}], "*)"}], "\n", 
+   
+   RowBox[{"\[HBar]", " ", "=", " ", 
+    RowBox[{"1.054", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "34"}], ")"}]}]}]}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Planck", "'"}], "s", " ", "constant", " ", "h"}], "-", 
+     RowBox[{"bar", " ", "in", " ", "Joules", " ", "per", " ", "second"}]}], 
+    "*)"}], "\n", 
+   RowBox[{"e", " ", "=", " ", 
+    RowBox[{"1.602", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "19"}], ")"}]}]}]}], " ", 
+   RowBox[{"(*", 
+    RowBox[{"Electron", " ", "charge", " ", "in", " ", "coulombs"}], "*)"}], 
+   "\n", 
+   RowBox[{"em", " ", "=", " ", 
+    RowBox[{"9.109", "*", 
+     RowBox[{"10", "^", 
+      RowBox[{"(", 
+       RowBox[{"-", "31"}], ")"}]}]}]}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Electron", "'"}], "s", " ", "rest", " ", "mass"}], ",", " ", 
+     RowBox[{"in", " ", "kilograms"}]}], "*)"}], "\n", 
+   RowBox[{"emuon", " ", "=", " ", 
+    RowBox[{"207", "*", "em"}]}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Muon", " ", "rest", " ", "mass"}], ",", " ", 
+     RowBox[{"relative", " ", "to", " ", "electron"}]}], "*)"}], "\n", 
+   RowBox[{"Zc", " ", "=", " ", "5"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Mass", " ", "of", " ", "nucleus", " ", "in", " ", "Carbon", " ", 
+     RowBox[{"(", 
+      RowBox[{"multiple", " ", "of", " ", 
+       RowBox[{"electron", "'"}], "s", " ", "mass"}], ")"}]}], "*)"}], "\n", 
+   RowBox[{"Zu", " ", "=", " ", "91"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{"Mass", " ", "of", " ", "nucleus", " ", "in", " ", "Uranium", " ", 
+     RowBox[{"(", 
+      RowBox[{"multiple", " ", "of", " ", 
+       RowBox[{"electron", "'"}], "s", " ", "mass"}], ")"}]}], "*)"}], "\n", 
+   RowBox[{"ni", "=", "1"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+    "principle", " ", "quantum", " ", "number", " ", "of", " ", "the", " ", 
+     "groundstate", " ", 
+     RowBox[{"(", 
+      RowBox[{"1", "s"}], ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Permitivity of free space, in farads per meter ;\>\"", ",", " ", 
+     RowBox[{"\[Epsilon]", " ", "=", " ", 
+      RowBox[{"8.854", "*", 
+       RowBox[{"10", "^", 
+        RowBox[{"(", 
+         RowBox[{"-", "12"}], ")"}]}]}]}]}], "  ", "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Planck's constant h-bar in Joules per second ; \>\"", ",", " ", 
+     RowBox[{"\[HBar]", " ", "=", " ", 
+      RowBox[{"1.054", "*", 
+       RowBox[{"10", "^", 
+        RowBox[{"(", 
+         RowBox[{"-", "34"}], ")"}]}]}]}]}], "]"}], " ", "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Electron charge in coulombs ; \>\"", ",", " ", 
+     RowBox[{"e", " ", "=", " ", 
+      RowBox[{"1.602", "*", 
+       RowBox[{"10", "^", 
+        RowBox[{"(", 
+         RowBox[{"-", "19"}], ")"}]}]}]}]}], "]"}], " ", "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Electron's rest mass, in kilograms ; \>\"", ",", " ", 
+     RowBox[{"em", " ", "=", " ", 
+      RowBox[{"9.109", "*", 
+       RowBox[{"10", "^", 
+        RowBox[{"(", 
+         RowBox[{"-", "31"}], ")"}]}]}]}]}], "]"}], " ", "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Muon rest mass, relative to electron ; \>\"", ",", " ", 
+     RowBox[{"emuon", " ", "=", " ", 
+      RowBox[{"207", "*", "em"}]}]}], " ", "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Mass of nucleus in Carbon (multiple of electron's mass); \>\"", ",", 
+     " ", 
+     RowBox[{"Zc", " ", "=", " ", "5"}]}], " ", "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Mass of nucleus in Uranium (multiple of electron's mass) ; \>\"", 
+     ",", " ", 
+     RowBox[{"Zu", " ", "=", " ", "91"}]}], "]"}], " ", "\n", "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"PART", " ", "a"}], " ", "*)"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Binding energy for (1s) electron in Carbon,  =\>\"", ",", " ", 
+     RowBox[{"EnergyC", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"em", "/", 
+         RowBox[{"(", 
+          RowBox[{"2", " ", 
+           RowBox[{"\[HBar]", "^", "2"}]}], ")"}]}], ")"}], "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Zc", "*", 
+          RowBox[{
+           RowBox[{"e", "^", "2"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"4", "*", "\[Pi]", "*", "\[Epsilon]"}], ")"}]}]}], ")"}], 
+        "^", "2"}], "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"(", 
+          RowBox[{"1", "/", 
+           RowBox[{"ni", "^", "2"}]}], ")"}], ")"}], "/", 
+        RowBox[{"(", 
+         RowBox[{"1.602", "*", 
+          RowBox[{"10", "^", 
+           RowBox[{"(", 
+            RowBox[{"-", "19"}], ")"}]}]}], ")"}]}]}]}]}], "]"}], " ", "\n", 
+   "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"PART", " ", "b"}], " ", "*)"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Binding energy for (1s) electron in Uranium  =\>\"", ",", " ", 
+     RowBox[{"EnergyU", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"em", "/", 
+         RowBox[{"(", 
+          RowBox[{"2", " ", 
+           RowBox[{"\[HBar]", "^", "2"}]}], ")"}]}], ")"}], "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"Zu", "*", 
+          RowBox[{
+           RowBox[{"e", "^", "2"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"4", "*", "\[Pi]", "*", "\[Epsilon]"}], ")"}]}]}], ")"}], 
+        "^", "2"}], "*", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"(", 
+          RowBox[{"1", "/", 
+           RowBox[{"ni", "^", "2"}]}], ")"}], ")"}], " ", "/", 
+        RowBox[{"(", 
+         RowBox[{"1.602", "*", 
+          RowBox[{"10", "^", 
+           RowBox[{"(", 
+            RowBox[{"-", "19"}], ")"}]}]}], ")"}]}]}]}]}], "]"}], " ", "\n", 
+   "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"PART", " ", "c"}], " ", "*)"}], "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"PART", " ", "d"}], " ", "*)"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Hydrogen's Bohr Radius =\>\"", ",", " ", 
+     RowBox[{"a", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"4", " ", "\[Pi]", "*", "\[Epsilon]", "*", 
+         RowBox[{"\[HBar]", "^", "2"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{"em", "*", 
+         RowBox[{"e", "^", "2"}]}], ")"}]}]}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{
+    "\"\<Wavefunction of Electron in (1s) orbital,  =\>\"", ",", " ", 
+     RowBox[{
+      RowBox[{"GroundstateHydrogen", "[", "r_", "]"}], " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "/", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{"\[Pi]", "*", 
+           RowBox[{"a", "^", "3"}]}], "]"}]}], ")"}], "*", 
+       RowBox[{"Exp", "[", 
+        RowBox[{
+         RowBox[{"-", "r"}], "/", "a"}], "]"}]}]}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Insuring function is normalized; =\>\"", ",", " ", 
+     RowBox[{"TotalProbability", " ", "=", " ", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Theta]", "]"}], "*", 
+         RowBox[{"Integrate", "[", 
+          RowBox[{
+           RowBox[{"Integrate", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"r", "^", "2"}], "*", 
+              RowBox[{
+               RowBox[{"GroundstateHydrogen", "[", "r", "]"}], "^", "2"}]}], 
+             ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"r", ",", " ", "0", ",", " ", "\[Infinity]"}], "}"}]}], 
+            "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"\[Phi]", ",", " ", "0", ",", " ", 
+             RowBox[{"2", " ", "\[Pi]"}]}], "}"}]}], "]"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"\[Theta]", ",", " ", "0", ",", " ", "\[Pi]"}], "}"}]}], 
+       "]"}]}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Probability of finding inside proton; =\>\"", ",", " ", 
+     RowBox[{"ProbabilityinProton", " ", "=", " ", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Theta]", "]"}], "*", 
+         RowBox[{"Integrate", "[", 
+          RowBox[{
+           RowBox[{"Integrate", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"r", "^", "2"}], "*", 
+              RowBox[{
+               RowBox[{"GroundstateHydrogen", "[", "r", "]"}], "^", "2"}]}], 
+             ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"r", ",", " ", "0", ",", " ", 
+               RowBox[{"8.78", "*", 
+                RowBox[{"10", "^", 
+                 RowBox[{"(", 
+                  RowBox[{"-", "16"}], ")"}]}]}]}], "}"}]}], "]"}], ",", " ", 
+           
+           RowBox[{"{", 
+            RowBox[{"\[Phi]", ",", " ", "0", ",", " ", 
+             RowBox[{"2", " ", "\[Pi]"}]}], "}"}]}], "]"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"\[Theta]", ",", " ", "0", ",", " ", "\[Pi]"}], "}"}]}], 
+       "]"}]}]}], "]"}], "\n", "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"PART", " ", "e"}], " ", "*)"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Bohr Radius of Muonic Hydrogen =\>\"", ",", " ", 
+     RowBox[{"amuon", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"4", " ", "\[Pi]", "*", "\[Epsilon]", "*", 
+         RowBox[{"\[HBar]", "^", "2"}]}], ")"}], "/", 
+       RowBox[{"(", 
+        RowBox[{"emuon", "*", 
+         RowBox[{"e", "^", "2"}]}], ")"}]}]}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Muonic Hydrogen's groundstate wavefunction; =\>\"", ",", " ", 
+     RowBox[{
+      RowBox[{"MuonicGroundstateHydrogen", "[", "r_", "]"}], " ", "=", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "/", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{"\[Pi]", "*", 
+           RowBox[{"amuon", "^", "3"}]}], "]"}]}], ")"}], "*", 
+       RowBox[{"Exp", "[", 
+        RowBox[{
+         RowBox[{"-", "r"}], "/", "amuon"}], "]"}]}]}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Insuring function is normalized; =\>\"", ",", "\n", " ", 
+     RowBox[{"MuonTotalProbability", " ", "=", " ", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Theta]", "]"}], "*", 
+         RowBox[{"Integrate", "[", 
+          RowBox[{
+           RowBox[{"Integrate", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"r", "^", "2"}], "*", 
+              RowBox[{
+               RowBox[{"MuonicGroundstateHydrogen", "[", "r", "]"}], "^", 
+               "2"}]}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"r", ",", " ", "0", ",", " ", "\[Infinity]"}], "}"}]}], 
+            "]"}], ",", " ", 
+           RowBox[{"{", 
+            RowBox[{"\[Phi]", ",", " ", "0", ",", " ", 
+             RowBox[{"2", " ", "\[Pi]"}]}], "}"}]}], "]"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"\[Theta]", ",", " ", "0", ",", " ", "\[Pi]"}], "}"}]}], 
+       "]"}]}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Probability of finding inside proton; =\>\"", ",", "\n", " ", 
+     RowBox[{"MuonProbabilityinProton", " ", "=", " ", 
+      RowBox[{"Integrate", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Sin", "[", "\[Theta]", "]"}], "*", 
+         RowBox[{"Integrate", "[", 
+          RowBox[{
+           RowBox[{"Integrate", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"r", "^", "2"}], "*", 
+              RowBox[{
+               RowBox[{"MuonicGroundstateHydrogen", "[", "r", "]"}], "^", 
+               "2"}]}], ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"r", ",", " ", "0", ",", " ", 
+               RowBox[{"8.78", "*", 
+                RowBox[{"10", "^", 
+                 RowBox[{"(", 
+                  RowBox[{"-", "16"}], ")"}]}]}]}], "}"}]}], "]"}], ",", " ", 
+           
+           RowBox[{"{", 
+            RowBox[{"\[Phi]", ",", " ", "0", ",", " ", 
+             RowBox[{"2", " ", "\[Pi]"}]}], "}"}]}], "]"}]}], ",", " ", 
+        RowBox[{"{", 
+         RowBox[{"\[Theta]", ",", " ", "0", ",", " ", "\[Pi]"}], "}"}]}], 
+       "]"}]}]}], "]"}], "\n", "\n"}]}]], "Input",
+ CellChangeTimes->{{3.763047485802978*^9, 3.763047536902391*^9}, {
+   3.763047609210722*^9, 3.763047649788089*^9}, {3.7630476844053917`*^9, 
+   3.763047692682242*^9}, {3.7630482637443542`*^9, 3.763048327218905*^9}, {
+   3.763048690459177*^9, 3.7630487030618668`*^9}, {3.763048733983284*^9, 
+   3.763048794853108*^9}, {3.763048883094709*^9, 3.763049136561572*^9}, {
+   3.763049467254941*^9, 3.763049470481111*^9}, {3.763049602913965*^9, 
+   3.7630498058201113`*^9}, {3.7630505003349657`*^9, 
+   3.7630505253828583`*^9}, {3.763050580386931*^9, 3.7630507221464148`*^9}, {
+   3.7630507642113733`*^9, 3.7630508623671*^9}, {3.763050902511527*^9, 
+   3.76305107991325*^9}, 3.7630511100350513`*^9, {3.763051948509016*^9, 
+   3.7630519533355722`*^9}, {3.763051986516296*^9, 3.763051991478681*^9}, {
+   3.763075051862391*^9, 3.763075078714672*^9}, {3.7630758601445713`*^9, 
+   3.7630758794778347`*^9}, {3.76313591027982*^9, 
+   3.7631359564267387`*^9}},ExpressionUUID->"d75c13ca-8a1c-4d6e-87a7-\
+f0ce16e83329"],
+
+Cell[BoxData["8.854`*^-12"], "Output",
+ CellChangeTimes->{
+  3.763048362949012*^9, 3.763048712079877*^9, 3.763048827086275*^9, {
+   3.763049109153803*^9, 3.7630491369932327`*^9}, 3.763049637573023*^9, {
+   3.763050540414057*^9, 3.763050571647862*^9}, 3.763050667009079*^9, 
+   3.763050723472899*^9, 3.763050887354751*^9, {3.7630510583966093`*^9, 
+   3.763051080546154*^9}, 3.76305111977393*^9, 3.7630519551659603`*^9, 
+   3.763051992672081*^9},
+ CellLabel->
+  "Out[181]=",ExpressionUUID->"7f4225c2-aba7-4e3a-aaf8-1f48db1886b4"],
+
+Cell[BoxData["1.0540000000000001`*^-34"], "Output",
+ CellChangeTimes->{
+  3.763048362949012*^9, 3.763048712079877*^9, 3.763048827086275*^9, {
+   3.763049109153803*^9, 3.7630491369932327`*^9}, 3.763049637573023*^9, {
+   3.763050540414057*^9, 3.763050571647862*^9}, 3.763050667009079*^9, 
+   3.763050723472899*^9, 3.763050887354751*^9, {3.7630510583966093`*^9, 
+   3.763051080546154*^9}, 3.76305111977393*^9, 3.7630519551659603`*^9, 
+   3.7630519926839733`*^9},
+ CellLabel->
+  "Out[182]=",ExpressionUUID->"44921e1e-3814-48ad-800f-679d18cee5a0"],
+
+Cell[BoxData["1.602`*^-19"], "Output",
+ CellChangeTimes->{
+  3.763048362949012*^9, 3.763048712079877*^9, 3.763048827086275*^9, {
+   3.763049109153803*^9, 3.7630491369932327`*^9}, 3.763049637573023*^9, {
+   3.763050540414057*^9, 3.763050571647862*^9}, 3.763050667009079*^9, 
+   3.763050723472899*^9, 3.763050887354751*^9, {3.7630510583966093`*^9, 
+   3.763051080546154*^9}, 3.76305111977393*^9, 3.7630519551659603`*^9, 
+   3.763051992693151*^9},
+ CellLabel->
+  "Out[183]=",ExpressionUUID->"c60b2b05-a645-4e64-a1ea-619eb1de340b"],
+
+Cell[BoxData["9.109000000000001`*^-31"], "Output",
+ CellChangeTimes->{
+  3.763048362949012*^9, 3.763048712079877*^9, 3.763048827086275*^9, {
+   3.763049109153803*^9, 3.7630491369932327`*^9}, 3.763049637573023*^9, {
+   3.763050540414057*^9, 3.763050571647862*^9}, 3.763050667009079*^9, 
+   3.763050723472899*^9, 3.763050887354751*^9, {3.7630510583966093`*^9, 
+   3.763051080546154*^9}, 3.76305111977393*^9, 3.7630519551659603`*^9, 
+   3.763051992702737*^9},
+ CellLabel->
+  "Out[184]=",ExpressionUUID->"2cdc9b7f-9c89-4e45-a2b8-a1db5e9e6085"],
+
+Cell[BoxData["1.8855630000000001`*^-28"], "Output",
+ CellChangeTimes->{
+  3.763048362949012*^9, 3.763048712079877*^9, 3.763048827086275*^9, {
+   3.763049109153803*^9, 3.7630491369932327`*^9}, 3.763049637573023*^9, {
+   3.763050540414057*^9, 3.763050571647862*^9}, 3.763050667009079*^9, 
+   3.763050723472899*^9, 3.763050887354751*^9, {3.7630510583966093`*^9, 
+   3.763051080546154*^9}, 3.76305111977393*^9, 3.7630519551659603`*^9, 
+   3.763051992712453*^9},
+ CellLabel->
+  "Out[185]=",ExpressionUUID->"ba22d2e9-4b60-4dd2-b593-c4223f0b5f9f"],
+
+Cell[BoxData["5"], "Output",
+ CellChangeTimes->{
+  3.763048362949012*^9, 3.763048712079877*^9, 3.763048827086275*^9, {
+   3.763049109153803*^9, 3.7630491369932327`*^9}, 3.763049637573023*^9, {
+   3.763050540414057*^9, 3.763050571647862*^9}, 3.763050667009079*^9, 
+   3.763050723472899*^9, 3.763050887354751*^9, {3.7630510583966093`*^9, 
+   3.763051080546154*^9}, 3.76305111977393*^9, 3.7630519551659603`*^9, 
+   3.763051992722875*^9},
+ CellLabel->
+  "Out[186]=",ExpressionUUID->"cc1c6b4b-49f8-4121-913f-e1daf8f09843"],
+
+Cell[BoxData["91"], "Output",
+ CellChangeTimes->{
+  3.763048362949012*^9, 3.763048712079877*^9, 3.763048827086275*^9, {
+   3.763049109153803*^9, 3.7630491369932327`*^9}, 3.763049637573023*^9, {
+   3.763050540414057*^9, 3.763050571647862*^9}, 3.763050667009079*^9, 
+   3.763050723472899*^9, 3.763050887354751*^9, {3.7630510583966093`*^9, 
+   3.763051080546154*^9}, 3.76305111977393*^9, 3.7630519551659603`*^9, 
+   3.7630519927325363`*^9},
+ CellLabel->
+  "Out[187]=",ExpressionUUID->"f0b3623b-04dd-4c24-9ba3-c8ef83be8891"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Permitivity of free space, in farads per meter ;\"\>", 
+   "\[InvisibleSpace]", "8.854`*^-12"}],
+  SequenceForm["Permitivity of free space, in farads per meter ;", 8.854*^-12],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992742087*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"b5f72834-02ba-482c-a8cb-f6fc395515d2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Planck's constant h-bar in Joules per second ; \"\>", 
+   "\[InvisibleSpace]", "1.0540000000000001`*^-34"}],
+  SequenceForm[
+  "Planck's constant h-bar in Joules per second ; ", 1.0540000000000001`*^-34],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.76305199275204*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"bc7ba911-2cd0-41a4-bd74-5bfeec9777a5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Electron charge in coulombs ; \"\>", "\[InvisibleSpace]", 
+   "1.602`*^-19"}],
+  SequenceForm["Electron charge in coulombs ; ", 1.602*^-19],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992766593*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"0f1d15d9-de06-4845-8ac4-d478b47ae7bd"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Electron's rest mass, in kilograms ; \"\>", 
+   "\[InvisibleSpace]", "9.109000000000001`*^-31"}],
+  SequenceForm[
+  "Electron's rest mass, in kilograms ; ", 9.109000000000001*^-31],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992775878*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"439bf5bc-77c5-469d-83fb-527cf34b66b6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Muon rest mass, relative to electron ; \"\>", 
+   "\[InvisibleSpace]", "1.8855630000000001`*^-28"}],
+  SequenceForm[
+  "Muon rest mass, relative to electron ; ", 1.8855630000000001`*^-28],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992784563*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"537bf87d-4504-480f-94b7-c1f509769a1b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Mass of nucleus in Carbon (multiple of electron's mass); \"\>",
+    "\[InvisibleSpace]", "5"}],
+  SequenceForm["Mass of nucleus in Carbon (multiple of electron's mass); ", 5],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992791066*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"0cb17492-e8cd-41a2-abe5-8a979c977f14"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Mass of nucleus in Uranium (multiple of electron's mass) ; \
+\"\>", "\[InvisibleSpace]", "91"}],
+  SequenceForm[
+  "Mass of nucleus in Uranium (multiple of electron's mass) ; ", 91],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992797748*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"2be23c8a-4abf-48d4-a6cf-7d39de0602a1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Binding energy for (1s) electron in Carbon,  =\"\>", 
+   "\[InvisibleSpace]", "340.3989919033435`"}],
+  SequenceForm[
+  "Binding energy for (1s) electron in Carbon,  =", 340.3989919033435],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992804028*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"7b117b7b-7d99-4970-8bb3-92145b5b347f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Binding energy for (1s) electron in Uranium  =\"\>", 
+   "\[InvisibleSpace]", "112753.7620780635`"}],
+  SequenceForm[
+  "Binding energy for (1s) electron in Uranium  =", 112753.7620780635],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.7630519928101387`*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"5885dc1b-3636-4c5e-ab96-3f85a1eda668"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Hydrogen's Bohr Radius =\"\>", "\[InvisibleSpace]", 
+   "5.287311261245432`*^-11"}],
+  SequenceForm["Hydrogen's Bohr Radius =", 5.287311261245432*^-11],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992816764*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"c3e10b3f-3a10-4397-8ae1-a3d08301de43"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Wavefunction of Electron in (1s) orbital,  =\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"1.46748187817803`*^15", " ", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"-", "1.8913204662826088`*^10"}], " ", "r"}]]}]}],
+  SequenceForm[
+  "Wavefunction of Electron in (1s) orbital,  =", 1.46748187817803*^15 
+   E^((-1.8913204662826088`*^10) $CellContext`r)],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.76305199282446*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"c9fa2b91-e4b2-49e4-90c4-66f70ea90e68"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Insuring function is normalized; =\"\>", "\[InvisibleSpace]", 
+   "1.0000000000000013`"}],
+  SequenceForm["Insuring function is normalized; =", 1.0000000000000013`],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.7630519928311253`*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"2a605ef2-7f2e-4e23-912f-88d07f22c941"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Probability of finding inside proton; =\"\>", 
+   "\[InvisibleSpace]", "6.07337217288306`*^-15"}],
+  SequenceForm[
+  "Probability of finding inside proton; =", 6.07337217288306*^-15],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992837573*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"5cbe5dc6-049a-4ab7-8267-2834d1acd395"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Bohr Radius of Muonic Hydrogen =\"\>", "\[InvisibleSpace]", 
+   "2.5542566479446535`*^-13"}],
+  SequenceForm["Bohr Radius of Muonic Hydrogen =", 2.5542566479446535`*^-13],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992844335*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"523c5fc4-f27d-499d-8a8f-82a1431a6a71"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Muonic Hydrogen's groundstate wavefunction; =\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"4.370471223630194`*^18", " ", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{
+      RowBox[{"-", "3.915033365205`*^12"}], " ", "r"}]]}]}],
+  SequenceForm[
+  "Muonic Hydrogen's groundstate wavefunction; =", 4.370471223630194*^18 
+   E^((-3.915033365205*^12) $CellContext`r)],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.76305199285081*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"b69f2b3d-1297-413f-a1af-a23ebbc3254b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Insuring function is normalized; =\"\>", "\[InvisibleSpace]", 
+   "1.0000000000000082`"}],
+  SequenceForm["Insuring function is normalized; =", 1.0000000000000082`],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.763051992944553*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"487637dc-f79e-4b10-b2e5-103020953a60"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Probability of finding inside proton; =\"\>", 
+   "\[InvisibleSpace]", "5.387531288572149`*^-8"}],
+  SequenceForm[
+  "Probability of finding inside proton; =", 5.387531288572149*^-8],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.763049109241872*^9, 3.763049137068461*^9}, 
+   3.763049637639868*^9, 3.763050540503373*^9, 3.763050667101988*^9, 
+   3.763050723542691*^9, 3.763050887413114*^9, {3.763051058494898*^9, 
+   3.763051080643352*^9}, 3.763051119867702*^9, 3.7630519552612457`*^9, 
+   3.76305199295315*^9},
+ CellLabel->
+  "During evaluation of \
+In[181]:=",ExpressionUUID->"e181e5e9-b92a-4f3e-9b5b-dba83dedf35e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.7630483359895477`*^9, 3.763048345487533*^9}, 
+   3.763048719337297*^9},
+ CellLabel->
+  "In[227]:=",ExpressionUUID->"816d9fb5-2c00-4e39-bc69-bde7df0fa26e"]
+},
+WindowSize->{1141, 662},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
+2018)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "ProgrammingLabDefault.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 13717, 356, 1217, "Input",ExpressionUUID->"d75c13ca-8a1c-4d6e-87a7-f0ce16e83329"],
+Cell[14300, 380, 527, 9, 36, "Output",ExpressionUUID->"7f4225c2-aba7-4e3a-aaf8-1f48db1886b4"],
+Cell[14830, 391, 542, 9, 36, "Output",ExpressionUUID->"44921e1e-3814-48ad-800f-679d18cee5a0"],
+Cell[15375, 402, 527, 9, 36, "Output",ExpressionUUID->"c60b2b05-a645-4e64-a1ea-619eb1de340b"],
+Cell[15905, 413, 539, 9, 36, "Output",ExpressionUUID->"2cdc9b7f-9c89-4e45-a2b8-a1db5e9e6085"],
+Cell[16447, 424, 540, 9, 36, "Output",ExpressionUUID->"ba22d2e9-4b60-4dd2-b593-c4223f0b5f9f"],
+Cell[16990, 435, 517, 9, 36, "Output",ExpressionUUID->"cc1c6b4b-49f8-4121-913f-e1daf8f09843"],
+Cell[17510, 446, 520, 9, 36, "Output",ExpressionUUID->"f0b3623b-04dd-4c24-9ba3-c8ef83be8891"],
+Cell[CellGroupData[{
+Cell[18055, 459, 667, 13, 25, "Print",ExpressionUUID->"b5f72834-02ba-482c-a8cb-f6fc395515d2"],
+Cell[18725, 474, 694, 14, 25, "Print",ExpressionUUID->"bc7ba911-2cd0-41a4-bd74-5bfeec9777a5"],
+Cell[19422, 490, 631, 13, 25, "Print",ExpressionUUID->"0f1d15d9-de06-4845-8ac4-d478b47ae7bd"],
+Cell[20056, 505, 672, 14, 25, "Print",ExpressionUUID->"439bf5bc-77c5-469d-83fb-527cf34b66b6"],
+Cell[20731, 521, 679, 14, 25, "Print",ExpressionUUID->"537bf87d-4504-480f-94b7-c1f509769a1b"],
+Cell[21413, 537, 666, 13, 24, "Print",ExpressionUUID->"0cb17492-e8cd-41a2-abe5-8a979c977f14"],
+Cell[22082, 552, 673, 14, 24, "Print",ExpressionUUID->"2be23c8a-4abf-48d4-a6cf-7d39de0602a1"],
+Cell[22758, 568, 680, 14, 24, "Print",ExpressionUUID->"7b117b7b-7d99-4970-8bb3-92145b5b347f"],
+Cell[23441, 584, 682, 14, 24, "Print",ExpressionUUID->"5885dc1b-3636-4c5e-ab96-3f85a1eda668"],
+Cell[24126, 600, 643, 13, 25, "Print",ExpressionUUID->"c3e10b3f-3a10-4397-8ae1-a3d08301de43"],
+Cell[24772, 615, 865, 19, 29, "Print",ExpressionUUID->"c9fa2b91-e4b2-49e4-90c4-66f70ea90e68"],
+Cell[25640, 636, 658, 13, 24, "Print",ExpressionUUID->"2a605ef2-7f2e-4e23-912f-88d07f22c941"],
+Cell[26301, 651, 674, 14, 25, "Print",ExpressionUUID->"5cbe5dc6-049a-4ab7-8267-2834d1acd395"],
+Cell[26978, 667, 662, 13, 25, "Print",ExpressionUUID->"523c5fc4-f27d-499d-8a8f-82a1431a6a71"],
+Cell[27643, 682, 860, 19, 29, "Print",ExpressionUUID->"b69f2b3d-1297-413f-a1af-a23ebbc3254b"],
+Cell[28506, 703, 656, 13, 24, "Print",ExpressionUUID->"487637dc-f79e-4b10-b2e5-103020953a60"],
+Cell[29165, 718, 673, 14, 25, "Print",ExpressionUUID->"e181e5e9-b92a-4f3e-9b5b-dba83dedf35e"]
+}, Open  ]]
+}, Open  ]],
+Cell[29865, 736, 222, 4, 55, "Input",ExpressionUUID->"816d9fb5-2c00-4e39-bc69-bde7df0fa26e"]
+}
+]
+*)
+
